@@ -1,0 +1,14 @@
+mysql -u root -p  ；password
+CREATE USER todo ;//创建用户todo
+CREATE DATABASE todo;//创建数据库todo
+// grant 权限 on 数据库.数据表 to "用户" @ 主机名(%)
+grant all privileges on todo.* to todo @ '%'； // 赋予权限
+use todo;
+CREATE TABLE user 
+(
+    id BIGINT,
+    name varchar(255)
+);
+insert into user(id,name)values(1,"qwq");
+secect * from user;
+DELETE FROM user where id =1;
