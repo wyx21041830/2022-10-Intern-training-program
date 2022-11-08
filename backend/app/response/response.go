@@ -12,7 +12,7 @@ type Response struct {
 	Data interface{} `json:"data"`
 }
 
-func SendResponse(c echo.Context, code int, msg string, data ...interface{}) error{
+func SendResponse(c echo.Context, code int, msg string, data ...interface{}) error {
 	return c.JSON(http.StatusOK, Response{
 		Code: code,
 		Msg:  msg,

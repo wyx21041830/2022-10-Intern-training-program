@@ -6,7 +6,9 @@ import (
 
 func Auth(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		c.Set("uid", 114514)
+		User.Name = "author"
+		User.password = ""
+		User.UserId = 0
 		return next(c)
 	}
 }
