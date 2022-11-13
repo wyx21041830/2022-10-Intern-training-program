@@ -1,4 +1,4 @@
-package controller
+package print
 
 import (
 	"backend/app/response"
@@ -12,6 +12,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// Echo 通过 func(echo.Context) error 定义 handler 方法，
+// 其中 echo.Context 已经内嵌了 HTTP 请求和响应接口。
 // 创建
 func Create(c echo.Context) error {
 	todo := new(model.Todos)
