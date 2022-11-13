@@ -4,8 +4,8 @@
 // @BasePath     /api
 package main
 import (
-	"flybitch/app"
-	"flybitch/model"
+	"backend/app"
+	"backend/model"
 	"github.com/sirupsen/logrus"
 )
 func main() {

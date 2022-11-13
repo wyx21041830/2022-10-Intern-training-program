@@ -1,8 +1,8 @@
 package app
 
 import (
-	"flybitch/app/controller"
-	"flybitch/app/middleware"
+	"backend/app/controller"
+	"backend/app/middleware"
 )
 
 func addRoutes() {
@@ -12,5 +12,5 @@ func addRoutes() {
 	api.POST("/create", controller.Create)
 	api.POST("/update", controller.Update)
 	api.GET("/delete", controller.Del)
-	api.GET("/service/select", controller.Select)
+	api.GET("/select", controller.Select)
 }

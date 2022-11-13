@@ -1,8 +1,7 @@
 package app
 
 import (
-	"flybitch/utils"
-
+	"backend/utils"
 	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
 )

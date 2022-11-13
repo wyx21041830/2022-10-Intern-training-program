@@ -1,33 +1,21 @@
 package model
 
 import (
-	"fmt"
-
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
+// GORM 允许通过一个现有的数据库连接来初始化 *gorm.DB
 var DB *gorm.DB
 
 func Init() {
 	connectDatabase()
-	fmt.Println("connected!!")
-	//err := DB.AutoMigrate(&Todo{}) // TODO: add table structs here
-	if !DB.Migrator().HasTable(&Todo{}) {
-		err := DB.Migrator().CreateTable(&User{})
-		if err != nil {
-			logrus.Error(err)
-		}
+	err := DB.AutoMigrate(&Users{}, &Todos{}) // TODO: add table structs here
+	if err != nil {
+		logrus.Fatal(err)
 	}
-	if !DB.Migrator().HasTable(&Todo{}) {
-		err := DB.Migrator().CreateTable(&Todo{})
-		if err != nil {
-			logrus.Error(err)
-		}
-	}
-
 }
 
 func connectDatabase() {
@@ -37,7 +25,7 @@ func connectDatabase() {
 		logrus.Panic(err)
 	}
 
-	loginInfo := viper.GetStringMapString("User")
+	loginInfo := viper.GetStringMapString("Users")
 	dbArgs := loginInfo["username"] + ":" + loginInfo["password"] +
 		"@(localhost)/" + loginInfo["db_name"] + "?charset=utf8mb4&parseTime=True&loc=Local"
 	var err error

@@ -1,13 +1,16 @@
 package model
 
-type User struct {
-	UserId   uint   `json:"id" form:"id" gorm:"primaryKey"`
-	Name     string `json:"name" form:"name"`
-	Password string `json:"passwd" form:"passwd"`
+import "gorm.io/gorm"
+
+type Users struct {
+	gorm.Model
+	Name     string
+	Password string
 }
 
-type Todo struct {
-	Id     uint   `json:"id" form:"id" gorm:"primaryKey"`
-	UserId uint   `json:"userId" form:"userId"`
-	Info   string `json:"Info" form:"Info"`
+type Todos struct {
+	gorm.Model
+	UserId  uint
+	title   string
+	content string
 }

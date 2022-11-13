@@ -15,6 +15,11 @@ func Init() {
 	if err != nil {
 		logrus.Fatal(err)
 	}
+
+	fisrtuser:=DB.First(&foo{})// 查第一个
+
+
+
 }
 
 func connectDatabase() {
@@ -25,7 +30,6 @@ func connectDatabase() {
 	}
 
 	loginInfo := viper.GetStringMapString("sql")
-
 	dbArgs := loginInfo["username"] + ":" + loginInfo["password"] +
 		"@(localhost)/" + loginInfo["db_name"] + "?charset=utf8mb4&parseTime=True&loc=Local"
 	var err error

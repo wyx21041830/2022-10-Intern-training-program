@@ -1,21 +1,20 @@
 package controller
 
 import (
-	"backend/App/Response"
+	"backend/app/response"
 	"backend/model"
-	"backend/services"
 	"encoding/json"
 	"io"
 	"net/http"
 	"strconv"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
 )
 
 // 创建
 func Create(c echo.Context) error {
-	todo := new(model.Todo)
+	todo := new(model.Todos)
 	defer c.Request().Body.Close()
 	id, err := io.ReadAll(c.Request().Body)
 	if err == nil {
@@ -24,13 +23,13 @@ func Create(c echo.Context) error {
 	if err := json.Unmarshal(id, &todo); err != nil {
 		logrus.Error(err)
 	}
-	services.TodoAdd(todo)
-	return Response.SendRes(c, http.StatusOK, "post is ok", "add is ok")
+	model.Add(todo)
+	return response.SendResponse(c, http.StatusOK, "post is ok", "add is ok")
 }
 
 // Update
 func Update(c echo.Context) error {
-	todo := new(model.Todo)
+	todo := new(model.Todos)
 	defer c.Request().Body.Close()
 	id, err := io.ReadAll(c.Request().Body)
 	if err == nil {
@@ -39,22 +38,22 @@ func Update(c echo.Context) error {
 	if err := json.Unmarshal(id, &todo); err != nil {
 		logrus.Error("error2")
 	}
-	services.TodoUpdate(todo)
-	return Response.SendRes(c, http.StatusOK, "post is ok", "update is ok")
+	model.Update(todo)
+	return response.SendResponse(c, http.StatusOK, "post is ok", "update is ok")
 }
 
 // Select
 func Select(c echo.Context) error {
 	id := c.QueryParam("id")
 	i, _ := strconv.Atoi(id)
-	num := int(i)
-	tmp := services.TodoSelect(num)
-	return Response.SendRes(c, http.StatusOK, "post is ok", tmp)
+	num := uint(i)
+	tmp := model.Query1(num)
+	return response.SendResponse(c, http.StatusOK, "post is ok", tmp)
 } // Delete
 func Del(c echo.Context) error {
 	id := c.QueryParam("id")
 	i, _ := strconv.Atoi(id)
-	num := int(i)
-	services.TodoDelete(num)
-	return Response.SendRes(c, http.StatusOK, "post is ok", "delete is ok")
+	num := uint(i)
+	model.Dels(num)
+	return response.SendResponse(c, http.StatusOK, "post is ok", "delete is ok")
 }

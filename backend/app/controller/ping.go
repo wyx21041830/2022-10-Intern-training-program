@@ -1,8 +1,9 @@
 package controller
 
 import (
-	"flybitch/app/response"
+	"backend/app/response"
 	"net/http"
+
 	"github.com/labstack/echo/v4"
 )
 
