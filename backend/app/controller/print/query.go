@@ -1,7 +1,7 @@
 package print
 
 import (
-	"backend/App/Response"
+	"backend/App/response"
 	"fmt"
 	"net/http"
 
@@ -11,5 +11,5 @@ import (
 func DelGet(c echo.Context) error {
 	name := c.QueryParam("name")
 	fmt.Println(name)
-	return Response.SendResponse(c, http.StatusOK, "query is ok", "123")
+	return response.SendResponse(c, http.StatusOK, "query", "1")
 }
